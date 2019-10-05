@@ -128,3 +128,4 @@ STATICFILES_DIRS = (
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,"static"),
 
+DING_URL = "https://oapi.dingtalk.com/robot/send?access_token=d1e8b271ee11da2a3f4f1a9bf35f1613b422a7af74552c8e510b968d53333474"
