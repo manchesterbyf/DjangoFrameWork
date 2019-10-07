@@ -247,19 +247,19 @@
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="67" parent="9" name="picture">
+    <column id="67" parent="9" name="goods_store_id">
       <Position>11</Position>
-      <DataType>varchar(100)|0s</DataType>
+      <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="68" parent="9" name="goods_store_id">
+    <column id="68" parent="9" name="goods_type_id">
       <Position>12</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="69" parent="9" name="goods_type_id">
+    <column id="69" parent="9" name="picture">
       <Position>13</Position>
-      <DataType>integer|0s</DataType>
+      <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <index id="70" parent="9" name="Seller_goods_goods_store_id_41b0846f">
