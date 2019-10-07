@@ -67,6 +67,7 @@ def goods_list(request):
     elif  request_type == "k":
         if keyword:
             goods_list = Goods.objects.filter(goods_name__contains=keyword).order_by("-goods_pro_time")
+    #买家页面分页功能
     if goods_list:
         lenth = len(goods_list) / 5
         if lenth != int(lenth):

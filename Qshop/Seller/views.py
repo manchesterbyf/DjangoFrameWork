@@ -118,6 +118,7 @@ def goods_list(request,status,page=1):
         goodses = Goods.objects.filter(goods_store=user,goods_status=0)
     else:
         goodses = Goods.objects.all()
+    # 卖家页面分页功能
     all_goods = Paginator(goodses,10)
     goods_list = all_goods.page(page)
     return render(request,'seller/goods_list.html',locals())
