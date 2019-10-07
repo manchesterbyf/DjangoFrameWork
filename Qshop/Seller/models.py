@@ -33,7 +33,7 @@ class Goods(models.Model):
     goods_status = models.IntegerField()
     goods_description = models.TextField(default="好吃还不贵")
 
-    picture = models.ImageField(upload_to='static/seller/imgs')
+    picture = models.ImageField(upload_to='seller/imgs')
     goods_type = models.ForeignKey(to=GoodsType,on_delete=models.CASCADE,default=1)
     goods_store = models.ForeignKey(to=LoginUser,on_delete=models.CASCADE,default=1)
 
