@@ -6,4 +6,5 @@ urlpatterns = [
     path('login/',login),
     path('index/',index),
     path('slc/',send_login_code),
+    path('add_goods/',add_goods),
 ]

@@ -3,6 +3,7 @@ import requests,time,datetime
 from Seller.models import *
 from Qshop.settings import DING_URL
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render,HttpResponseRedirect,HttpResponse
 
@@ -78,6 +79,48 @@ def login(request):
 @LoginValid
 def index(request):
     return render(request,'seller/index.html',locals())
+
+@LoginValid
+def add_goods(request):
+    goods_type_list = GoodsType.objects.all()
+    if request.method == "POST":
+        data = request.POST
+        file = request.FILES
+
+        goods = Goods()
+        goods.goods_number = data.get("goods_number")
+        goods.goods_name = data.get("goods_name")
+        goods.goods_price = float(data.get("goods_price"))
+        goods.goods_count = int(data.get("goods_count"))
+        goods.goods_location = data.get("goods_location")
+        goods.goods_safe_date = int(data.get("goods_safe_date"))
+        goods.goods_pro_time = data.get("goods_pro_time")
+        goods.goods_status = 1
+        #保存外键类型
+        goods.goods_type = GoodsType.objects.get(id = int(data.get("goods_type")))
+        #保存图片
+        goods.picture = file.get("picture")
+        #保存对应的卖家
+        user_id = request.COOKIES.get("user_id")
+        goods.goods_store = LoginUser.objects.get(id = int(user_id))
+
+        goods.save()
+    return render(request,'seller/add_goods.html',locals())
+
+@LoginValid
+def goods_list(request,status,page=1):
+    user_id = request.COOKIES.get("user_id")
+    user = LoginUser.objects.get(id = int(user_id))
+    page = int(page)
+    if status == '1':
+        goodses = Goods.objects.filter(goods_store=user,goods_status=1)
+    elif status == '0':
+        goodses = Goods.objects.filter(goods_store=user,goods_status=0)
+    else:
+        goodses = Goods.objects.all()
+    all_goods = Paginator(goodses,10)
+    goods_list = all_goods.page(page)
+    return render(request,'seller/goods_list.html',locals())
 
 def sendDing(content,to=None):
     """
